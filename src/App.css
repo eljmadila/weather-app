@@ -1,0 +1,248 @@
+.w-search {
+  background-color: #fff;
+  padding: 30px 40px;
+  border-radius: 30px;
+  width: 100%;
+  max-width: 650px; 
+  margin: 0 auto;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+  box-sizing: border-box;
+}
+
+form {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+input {
+  flex: 1;
+  padding: 15px 20px;
+  font-size: 18px;
+  background-color: var(--light, #f4f6f8);
+  border: none;
+  border-radius: 30px;
+  color: var(--text-dark, #222);
+  width: 100%;
+}
+
+input::placeholder {
+  color: var(--text-muted, #888);
+}
+
+input:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(74, 144, 217, 0.25);
+}
+
+button {
+  width: 50px;
+  height: 50px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--light, #fff);
+  font-size: 18px;
+  border-radius: 50%;
+  background-color: var(--primary-color, #4a90e2);
+  border: none;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+button:hover {
+  background-color: var(--secondary-color, #357abd);
+  transform: scale(1.05);
+}
+
+button:active {
+  transform: scale(0.95);
+}
+
+.w-time {
+  text-align: center;
+  margin-top: 15px;
+}
+
+.w-time p {
+  color: var(--text-muted, #777);
+  font-size: 14px;
+  margin: 0;
+}
+
+.loader {
+  width: 40px;
+  height: 40px;
+  border: 4px solid var(--light, #f3f3f3);
+  border-top: 4px solid var(--primary-color, #4a90e2);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+  margin: 40px auto;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.error-message {
+  color: #d32f2f;
+  font-size: 16px;
+  text-align: center;
+  margin-top: 20px;
+}
+
+.w-details {
+  margin-top: 30px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+}
+
+.w-details h1 {
+  font-size: 32px;
+  margin: 0;
+  color: var(--text-dark, #222);
+}
+
+.w-details p {
+  margin: 4px 0 0;
+  color: var(--text-muted, #777);
+  font-size: 15px;
+}
+
+.w-details h2 {
+  font-size: 64px;
+  margin: 10px 0 0;
+  font-weight: 700;
+  color: var(--text-dark, #222);
+}
+
+#weather-icon {
+  width: 140px;
+  height: 140px;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+.w-conditions {
+  margin-top: 30px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+
+.w-forecast {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  gap: 10px;
+  margin-top: 25px;
+  overflow-x: auto; 
+  padding-bottom: 5px;
+}
+
+/* ==========================================
+   TABLET BREAKPOINT (max-width: 768px)
+   ========================================== */
+@media (max-width: 768px) {
+  .w-search {
+    padding: 25px 30px;
+    border-radius: 24px;
+  }
+
+  .w-details h1 {
+    font-size: 28px;
+  }
+
+  .w-details h2 {
+    font-size: 54px;
+  }
+
+  #weather-icon {
+    width: 120px;
+    height: 120px;
+  }
+
+  .w-conditions {
+    gap: 10px;
+  }
+}
+
+/* ==========================================
+   MOBILE BREAKPOINT (max-width: 576px)
+   ========================================== */
+@media (max-width: 576px) {
+  .w-search {
+    padding: 20px 18px;
+    border-radius: 20px;
+  }
+
+  input {
+    font-size: 16px;
+    padding: 12px 16px;
+  }
+
+  button {
+    width: 44px;
+    height: 44px;
+    font-size: 16px;
+  }
+
+  .w-details {
+    flex-direction: column-reverse; 
+    text-align: center;
+    margin-top: 20px;
+    gap: 10px;
+  }
+
+  .w-details h1 {
+    font-size: 24px;
+  }
+
+  .w-details h2 {
+    font-size: 48px;
+  }
+
+  #weather-icon {
+    width: 100px;
+    height: 100px;
+  }
+
+  .w-conditions {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); 
+    gap: 5px;
+    margin-top: 20px;
+  }
+
+  .w-forecast {
+    justify-content: flex-start;
+    gap: 8px;
+  }
+}
+
+/* ==========================================
+   SMALL PHONE BREAKPOINT (max-width: 380px)
+   ========================================== */
+@media (max-width: 380px) {
+  .w-details h2 {
+    font-size: 40px;
+  }
+
+  #weather-icon {
+    width: 80px;
+    height: 80px;
+  }
+
+  .w-conditions {
+    grid-template-columns: 1fr;
+  }
+}
