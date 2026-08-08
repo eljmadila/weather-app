@@ -3,7 +3,7 @@
   padding: 30px 40px;
   border-radius: 30px;
   width: 100%;
-  max-width: 650px; 
+  max-width: 650px;
   margin: 0 auto;
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
   box-sizing: border-box;
@@ -19,13 +19,15 @@ form {
 
 input {
   flex: 1;
-  padding: 15px 20px;
+  padding: 14px 20px;
   font-size: 18px;
   background-color: var(--light, #f4f6f8);
-  border: none;
+  border: 1px solid transparent;
   border-radius: 30px;
   color: var(--text-dark, #222);
   width: 100%;
+  min-height: 48px;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
 input::placeholder {
@@ -34,12 +36,13 @@ input::placeholder {
 
 input:focus {
   outline: none;
+  border-color: var(--primary-color, #4a90e2);
   box-shadow: 0 0 0 3px rgba(74, 144, 217, 0.25);
 }
 
 button {
-  width: 50px;
-  height: 50px;
+  width: 48px;
+  height: 48px;
   flex-shrink: 0;
   display: flex;
   align-items: center;
@@ -93,6 +96,7 @@ button:active {
   font-size: 16px;
   text-align: center;
   margin-top: 20px;
+  word-break: break-word;
 }
 
 .w-details {
@@ -108,6 +112,7 @@ button:active {
   font-size: 32px;
   margin: 0;
   color: var(--text-dark, #222);
+  word-break: break-word;
 }
 
 .w-details p {
@@ -121,6 +126,7 @@ button:active {
   margin: 10px 0 0;
   font-weight: 700;
   color: var(--text-dark, #222);
+  line-height: 1.1;
 }
 
 #weather-icon {
@@ -132,11 +138,9 @@ button:active {
 
 .w-conditions {
   margin-top: 30px;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
   gap: 15px;
-  flex-wrap: wrap;
 }
 
 .w-forecast {
@@ -145,8 +149,29 @@ button:active {
   justify-content: space-between;
   gap: 10px;
   margin-top: 25px;
-  overflow-x: auto; 
-  padding-bottom: 5px;
+  overflow-x: auto;
+  padding-bottom: 8px;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Custom horizontal scrollbar for forecast */
+.w-forecast::-webkit-scrollbar {
+  height: 6px;
+}
+
+.w-forecast::-webkit-scrollbar-track {
+  background: var(--light, #f4f6f8);
+  border-radius: 10px;
+}
+
+.w-forecast::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 10px;
+}
+
+.w-forecast::-webkit-scrollbar-thumb:hover {
+  background: var(--primary-color, #4a90e2);
 }
 
 /* ==========================================
@@ -154,8 +179,13 @@ button:active {
    ========================================== */
 @media (max-width: 768px) {
   .w-search {
-    padding: 25px 30px;
+    padding: 24px 28px;
     border-radius: 24px;
+  }
+
+  .w-details {
+    margin-top: 24px;
+    gap: 16px;
   }
 
   .w-details h1 {
@@ -173,6 +203,12 @@ button:active {
 
   .w-conditions {
     gap: 10px;
+    margin-top: 24px;
+  }
+
+  .w-forecast {
+    gap: 8px;
+    justify-content: flex-start;
   }
 }
 
@@ -181,13 +217,14 @@ button:active {
    ========================================== */
 @media (max-width: 576px) {
   .w-search {
-    padding: 20px 18px;
+    padding: 20px 16px;
     border-radius: 20px;
   }
 
   input {
     font-size: 16px;
     padding: 12px 16px;
+    min-height: 44px;
   }
 
   button {
@@ -196,19 +233,31 @@ button:active {
     font-size: 16px;
   }
 
+  .w-time {
+    margin-top: 12px;
+  }
+
+  .w-time p {
+    font-size: 13px;
+  }
+
   .w-details {
-    flex-direction: column-reverse; 
+    flex-direction: column-reverse;
     text-align: center;
-    margin-top: 20px;
-    gap: 10px;
+    margin-top: 18px;
+    gap: 8px;
   }
 
   .w-details h1 {
     font-size: 24px;
   }
 
+  .w-details p {
+    font-size: 14px;
+  }
+
   .w-details h2 {
-    font-size: 48px;
+    font-size: 46px;
   }
 
   #weather-icon {
@@ -217,32 +266,38 @@ button:active {
   }
 
   .w-conditions {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr); 
-    gap: 5px;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
     margin-top: 20px;
   }
 
   .w-forecast {
-    justify-content: flex-start;
+    margin-top: 20px;
     gap: 8px;
+    justify-content: flex-start;
   }
 }
 
 /* ==========================================
-   SMALL PHONE BREAKPOINT (max-width: 380px)
+   SMALL PHONE BREAKPOINT (max-width: 400px)
    ========================================== */
-@media (max-width: 380px) {
+@media (max-width: 400px) {
+  .w-search {
+    padding: 16px 12px;
+    border-radius: 16px;
+  }
+
   .w-details h2 {
-    font-size: 40px;
+    font-size: 38px;
   }
 
   #weather-icon {
-    width: 80px;
-    height: 80px;
+    width: 85px;
+    height: 85px;
   }
 
   .w-conditions {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 6px;
   }
 }
