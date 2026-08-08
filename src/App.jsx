@@ -1,12 +1,18 @@
 import React, { useEffect, useState } from 'react'
 import Condition from './components/Condition'
 import Forecast from './components/Forecast'
+import Splash from './components/Splash'
 import './App.css'
 
 const API_KEY = import.meta.env.VITE_API_KEY;
 const BASE_URL = import.meta.env.VITE_BASE_URL;
 
 function App() {
+  const [showSplash, setShowSplash] = useState(() => {
+    return !sessionStorage.getItem('hasSeenSplash')
+  })
+  const [splashFading, setSplashFading] = useState(false)
+
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState(null)
   const [city, setCity] = useState('')
@@ -24,6 +30,21 @@ function App() {
   useEffect(() => {
     getWeatherData('Nairobi')
   }, [])
+
+  useEffect(() => {
+    if (showSplash) {
+      const timer = setTimeout(() => {
+        setSplashFading(true)
+        const removeTimer = setTimeout(() => {
+          setShowSplash(false)
+          sessionStorage.setItem('hasSeenSplash', 'true')
+        }, 600)
+        return () => clearTimeout(removeTimer)
+      }, 2200)
+
+      return () => clearTimeout(timer)
+    }
+  }, [showSplash])
 
   const processForecast = (list) => {
     const grouped = {}
@@ -111,6 +132,8 @@ function App() {
 
   return (
     <div>
+      {showSplash && <Splash fading={splashFading} />}
+
       <div className='w-search'>
         <form onSubmit={handleSearch}>
           <input 
